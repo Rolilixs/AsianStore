@@ -1,0 +1,30 @@
+.footer_wrapper{
+    background-color: #171717;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+
+    width: 1300px;
+    margin: 0 auto;
+
+    color: white;
+}
+
+.company_name{
+    margin-top: 30px;
+    font-size: 60px;
+    font-weight: bold;
+    padding: 10px 15px;
+    width: fit-content;
+    border: 1px solid white;
+}
+
+.data{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}

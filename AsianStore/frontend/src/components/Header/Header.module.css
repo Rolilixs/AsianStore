@@ -1,0 +1,97 @@
+.header{
+    width: 1300px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.header_wrapper{
+    width: 100%;
+    background-color: #ffffff;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    height: fit-content;
+    z-index: 999;
+}
+
+.menu__button{
+    position: absolute;
+    visibility: hidden;
+}
+
+.menu__label{
+    cursor: pointer;
+    display: block;
+    position: relative;
+    border: none;
+    background: transparent;
+    width: 40px;
+    height: 26px;
+}
+
+.menu__label::before,
+.menu__label::after {
+    content: '';
+    left: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 4px;
+    border-radius: 10px;
+    background: #000;
+}
+
+.menu__label::before {
+    top: 0;
+    box-shadow: 0 11px 0 #000;
+    transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+
+.menu__label::after {
+    bottom: 0;
+    transition: bottom .3s .15s, transform .3s;
+}
+
+
+
+.menu__button:checked + .menu__label::before {
+    top: 11px;
+    transform: rotate(45deg);
+    box-shadow: 0 6px 0 rgba(0,0,0,0);
+    transition: box-shadow .15s, top .3s, transform .3s .15s;
+}
+.menu__button:checked + .menu__label::after {
+    bottom: 11px;
+    transform: rotate(-45deg);
+    transition: bottom .3s, transform .3s .15s;
+}
+
+.logo_name{
+    font-size: 32px;
+    vertical-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.search_input{
+    display: block;
+    border-radius: 100px;
+    width: 600px;
+    height: 100%;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0 20px;
+    background-color: #E2E2E2;
+    border: none;
+    outline: none;
+}
+
+.icon{
+    height: 40px;
+}

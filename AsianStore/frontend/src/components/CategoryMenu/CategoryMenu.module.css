@@ -1,0 +1,28 @@
+.category{
+    position: absolute;
+    top: 53px;
+    width: 440px;
+    left: -20px;
+
+}
+
+.category ul{
+    list-style-type: none;
+    background-color: white;
+}
+
+.category a{
+    display: block;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    width: 80%;
+}
+
+.category li{
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid grey;
+    justify-content: center;
+}

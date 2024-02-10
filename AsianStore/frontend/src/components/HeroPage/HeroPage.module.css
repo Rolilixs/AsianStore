@@ -1,0 +1,130 @@
+.hero {
+
+}
+
+.logo_image_wrapper {
+    height: 60vh;
+    position: relative;
+}
+
+.logo_image_wrapper img {
+    max-width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+.logo_text {
+    font-size: 48px;
+    color: white;
+    z-index: 90;
+    position: absolute;
+    bottom: 70px;
+    left: 70px;
+    width: 60%;
+}
+
+.logo_text > span {
+    color: #01FFFF;
+}
+
+h2 {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+    margin: 40px 0;
+
+}
+
+/* ======== ABOUT US ======== */
+.about_us {
+
+}
+
+.tile {
+    width: 80%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;
+    justify-content: center;
+    text-align: center;
+}
+
+.tile_col {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.tile_col img{
+    width: 100%;
+    max-height: 500px;
+}
+
+.col1 {
+    justify-content: space-between;
+}
+
+
+/* ======== REASONS ======== */
+.reasons {
+
+}
+
+.reasons_items {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 80%;
+}
+
+.reasons_items article {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.reasons_icon {
+    width: 150px;
+    height: 150px;
+    background-color: green;
+}
+
+.reasons_text {
+    width: 45%;
+    font-weight: bold;
+}
+
+
+/* ======== PARTNERS ======== */
+.partners{
+
+}
+
+.partners_items{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+}
+
+.partners_row{
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+}
+
+.partners_row img {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
