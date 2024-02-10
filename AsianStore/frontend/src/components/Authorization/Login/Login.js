@@ -1,57 +1,52 @@
-import React, {Component} from "react";
+import React, {Component, useState} from "react";
 import styles from "../LogReg.module.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
-
-class Login extends Component {
-    state = {
+const Login = ({ login, onSwitchForm, history }) => {
+    const [formData, setFormData] = useState({
         phone_number: null,
         password: null,
-    }
+    });
 
-    constructor(props) {
-        super(props);
-    }
+    const navigate = useNavigate();
 
-    onPhoneNumberChange = e => {
-        this.setState({phone_number: e.target.value})
-    }
+    const onInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
 
-    onPasswordChange = e => {
-        this.setState({password: e.target.value})
-    }
-
-    login = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        this.props.login({
-            phone_number: this.state.phone_number,
-            password: this.state.password,
-        })
-        this.props.history.push('/');
-    }
+        login({
+            phone_number: formData.phone_number,
+            password: formData.password,
+        });
+        navigate(-1);
+    };
 
-    render() {
-        return (
-            <form action="">
-                <div>
-                    <h2>Вход</h2>
-                    <p>Новый пользователь?</p>
-                    <p className={styles.switch_form}
-                       onClick={() => this.props.onSwitchForm("register")}>Регистрация</p>
-                </div>
-                <div>
-                    <label htmlFor={"phone_number"}>Номер телефона</label>
-                    <input id={"phone_number"} name={"phone_number"} type="tel"
-                           onChange={this.onPhoneNumberChange}/><br/>
+    return (
+        <form action="">
+            <div>
+                <h2>Вход</h2>
+                <p>Новый пользователь?</p>
+                <p className={styles.switch_form} onClick={() => onSwitchForm("register")}>
+                    Регистрация
+                </p>
+            </div>
+            <div>
+                <label htmlFor={"phone_number"}>Номер телефона</label>
+                <input id={"phone_number"} name={"phone_number"} type="tel" onChange={onInputChange} /><br />
 
-                    <label htmlFor={"password"}>Пароль</label>
-                    <input id={"password"} name={"password"} type="password" onChange={this.onPasswordChange}/>
-                </div>
-                <button type="submit" onClick={this.login}>Продолжить</button>
-            </form>
-        )
-    }
-}
+                <label htmlFor={"password"}>Пароль</label>
+                <input id={"password"} name={"password"} type="password" onChange={onInputChange} />
+            </div>
+            <button type="submit" onClick={onSubmit}>Продолжить</button>
+        </form>
+    );
+};
 
 export default Login;

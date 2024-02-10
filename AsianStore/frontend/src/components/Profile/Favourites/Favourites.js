@@ -1,17 +1,15 @@
-import React, {Component} from "react";
+import React from "react";
 import styles from "./Favourites.module.css";
 import ProductCard from "../../ProductCard/ProductCard";
 
-class Favourites extends Component{
+const Favourites = () => {
 
+    return (
+        <div>
+            <h2>Favourites</h2>
+        </div>
+    )
 
-    render() {
-        return(
-            <div>
-                <h2>Favourites</h2>
-            </div>
-        )
-    }
 }
 
 export default Favourites;

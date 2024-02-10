@@ -1,42 +1,37 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import styles from './CategoryMenu.module.css';
 import {Link} from "react-router-dom";
 
 
-class CategoryMenu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            categoryList: []
-        }
-    }
+const CategoryMenu = ({ menuVisible }) => {
+    const [categoryList, setCategoryList] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
         fetch('./api/category').then(
             response => { return response.json() }
         ).then(
             categoryList => {
-                this.setState(() => { return { categoryList } });
+                setCategoryList(categoryList);
             }
+        );
+    }, []);
+
+    if (menuVisible) {
+        return (
+            <div className={styles.category}>
+                <ul>
+                    {categoryList.map(category => (
+                        <li key={category.id}>
+                            <Link to={`/catalog/${category.id}`}>{category.name}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         );
     }
 
-    render() {
-        if (this.props.menuVisible)
-        return(
-            <div className={styles.category}>
-                <ul>
-                    {this.state.categoryList.map(category => {
-                        return(
-                            <li key={category.id}>
-                                <Link to={`/catalog/${category.id}`}>{category.name}</Link>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
-        )
-    }
-}
+    return null; // Если меню не видимо, возвращаем null
+};
+
 
 export default CategoryMenu;

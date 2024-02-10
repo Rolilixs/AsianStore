@@ -1,28 +1,27 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./UserData.module.css";
 import ConnectService from "../../../services/Connect";
 
 
-class UserData extends Component {
-    state = {
+const UserData = ({token}) => {
+    const [userData, setUserData] = useState({
         username: 'Нет данных',
         phone_number: 'Нет данных',
         email: 'Нет данных',
-    }
+    });
 
-    constructor(props) {
-        super(props);
-        ConnectService.profile_data(this.props.token)
+    useEffect(() => {
+        ConnectService.profile_data(token)
             .then(response => {
-                this.setState({
+                setUserData({
                     username: response.data.username,
                     phone_number: response.data.phone_number,
                     email: response.data.email,
                 })
             })
-    }
+    }, [token]);
 
-    changeData = (data) => {
+    const changeData = (data) => {
         let newData;
         // EDIT THIS SHIT LATER -> ADD CUSTOM MODAL WINDOW
         switch (data) {
@@ -36,45 +35,47 @@ class UserData extends Component {
                 newData = {email: prompt('Введите новый адрес электронный почты:')};
                 break;
         }
-        ConnectService.updateProfileData(this.props.token, newData)
-            .then(response => {
-                this.setState(response.data)
-            })
+        if (newData) {
+            ConnectService.updateProfileData(token, newData)
+                .then(response => {
+                    setUserData(response.data);
+                })
+                .catch(error => {
+                    console.error('Error updating profile data:', error);
+                });
+        }
     }
 
-    buttonChange = (onClick) => {
-        return (
-            <button className={styles.btn_change} onClick={onClick}>Изменить</button>
-        )
-    }
+    const buttonChange = (onClick) => (
+        <button className={styles.btn_change} onClick={onClick}>
+            Изменить
+        </button>
+    );
 
-    render() {
-
-        return (
-            <div className={styles.userdata}>
-                <p className={styles.section_label}>Учётные данные</p>
-                <table>
-                    <tbody>
-                    <tr>
-                        <td>Имя</td>
-                        <td>{this.state.username}</td>
-                        <td>{this.buttonChange(() => this.changeData("username"))}</td>
-                    </tr>
-                    <tr>
-                        <td>Номер телефона</td>
-                        <td>{this.state.phone_number}</td>
-                        <td>{this.buttonChange(() => this.changeData("phone_number"))}</td>
-                    </tr>
-                    <tr>
-                        <td>Адрес электронной почты</td>
-                        <td>{this.state.email}</td>
-                        <td>{this.buttonChange(() => this.changeData("email"))}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        )
-    }
+    return (
+        <div className={styles.userdata}>
+            <p className={styles.section_label}>Учётные данные</p>
+            <table>
+                <tbody>
+                <tr>
+                    <td>Имя</td>
+                    <td>{userData.username}</td>
+                    <td>{buttonChange(() => changeData("username"))}</td>
+                </tr>
+                <tr>
+                    <td>Номер телефона</td>
+                    <td>{userData.phone_number}</td>
+                    <td>{buttonChange(() => changeData("phone_number"))}</td>
+                </tr>
+                <tr>
+                    <td>Адрес электронной почты</td>
+                    <td>{userData.email}</td>
+                    <td>{buttonChange(() => changeData("email"))}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    )
 }
 
 

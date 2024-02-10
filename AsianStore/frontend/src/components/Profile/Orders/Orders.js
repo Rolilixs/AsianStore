@@ -1,15 +1,14 @@
-import React, {Component} from "react";
+import React from "react";
 import styles from "./Orders.module.css";
 
 
-class Orders extends Component{
-    render() {
-        return(
-            <div>
-                <h2>Orders</h2>
-            </div>
-        )
-    }
+const Orders = () => {
+
+    return (
+        <div>
+            <h2>Orders</h2>
+        </div>
+    )
 }
 
 
