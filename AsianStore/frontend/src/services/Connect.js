@@ -1,18 +1,22 @@
 import axios from 'axios';
 
 
-class ConnectService{
-    static login(data){
+class ConnectService {
+    static login(data) {
         return axios.post('/api/login/', data);
     }
 
-    static register(data){
+    static register(data) {
         return axios.post('/api/register/', data);
     }
 
-    static products(categoryId){
+    static products(categoryId) {
         // return axios.get(`./api/products?${categoryId}`, categoryId)
         return axios.get(`/api/products?category_id=${categoryId}`)
+    }
+
+    static productDetails(productId) {
+        return axios.get(`/api/product/${productId}`)
     }
 
     static profile_data(token) {

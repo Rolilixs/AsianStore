@@ -49,8 +49,8 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    url = models.ImageField(verbose_name="Изображение", upload_to="product_images")
-    product_id = models.ForeignKey("Product", verbose_name="Товар", on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name="Изображение", upload_to="product_images")
+    product_id = models.ForeignKey("Product", verbose_name="Товар", on_delete=models.CASCADE, related_name='photos')
 
     class Meta:
         verbose_name = "Изображение"

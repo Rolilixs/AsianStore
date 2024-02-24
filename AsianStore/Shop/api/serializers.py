@@ -27,6 +27,20 @@ class ProductsByCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = '__all__'
+
+
+class ProductDetailsSerializer(serializers.ModelSerializer):
+    photos = ProductImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'main_image', 'description', 'count_in_stock', 'photos']
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
