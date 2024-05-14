@@ -1,0 +1,30 @@
+.cart_items_list{
+    margin: 20px 0;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.he{
+    height: 40px;
+}
+.head_wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: center;
+}
+
+.do_offer_bt{
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    background-color: #000AFF;
+    cursor: pointer;
+}

@@ -14,6 +14,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem('user'));
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [error, setError] = useState(null);
+    const [cartItems, setCartItems] = useState([1, 2])
 
     const login = (data) => {
         ConnectService.login(data)
@@ -50,12 +51,16 @@ const App = () => {
             })
     }
 
+    const addToCart_bt = (item) => {
+        setCartItems([...cartItems, item])
+    }
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<Layout/>}>
-                    <Route index element={<Profile token={token}/>}/>
-                    <Route path="catalog/:id" element={<ProductCatalog/>}/>
+                    <Route index element={<Profile token={token} cartItems={cartItems}/>}/>
+                    <Route path="catalog/:id" element={<ProductCatalog token={token} addToCart_bt={addToCart_bt}/>}/>
                     <Route path="catalog/:id/product/:id" element={<ProductDetails/>}/>
                     <Route path="hero" element={<HeroPage/>}/>
                     {/*<Route index element={<HeroPage/>}/>*/}

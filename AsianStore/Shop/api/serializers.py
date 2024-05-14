@@ -41,6 +41,12 @@ class ProductDetailsSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'price', 'main_image', 'description', 'count_in_stock', 'photos']
 
 
+class FavouritesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favourite
+        fields = '__all__'
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

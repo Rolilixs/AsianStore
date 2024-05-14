@@ -19,7 +19,21 @@ class ConnectService {
         return axios.get(`/api/product/${productId}`)
     }
 
-    static profile_data(token) {
+    static getFavourites(token) {
+        axios.defaults.headers.common["Authorization"] = "Token " + token;
+        return axios.get(`/api/favourites`)
+    }
+
+    static getDinamycCart(cart) {
+        return axios.get(`/api/dbusket?items=${cart}`)
+    }
+
+    static addProductToFavourite(token, productId) {
+        axios.defaults.headers.common["Authorization"] = "Token " + token;
+        return axios.post(`/api/favourites`)
+    }
+
+    static profileData(token) {
         axios.defaults.headers.common["Authorization"] = "Token " + token;
         return axios.get('/api/profile_data/')
     }

@@ -36,6 +36,10 @@ class DeliveryTypeAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
 
+class FavouritesAdmin(admin.ModelAdmin): # УБРАТЬ
+    list_display = ("id", "product_id", "user_id")
+
+
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("user_id", "order_status_id", "delivery_type_id", "payment_type_id", "order_status_id")
 
@@ -46,3 +50,4 @@ admin.site.register(OrderStatus, OrderStatusAdmin)
 admin.site.register(PaymentType, PaymentTypeAdmin)
 admin.site.register(DeliveryType, DeliveryTypeAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Favourite, FavouritesAdmin)

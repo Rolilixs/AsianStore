@@ -22,7 +22,7 @@ const Profile = (props) => {
             case "userdata":
                 return <UserData {...props}/>;
             case "busket":
-                return <Busket {...props}/>;
+                return <Busket {...props} cartItems={props.cartItems}/>;
         }
     }
 

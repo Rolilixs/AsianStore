@@ -30,29 +30,46 @@ class ProductsByCategoryListView(generics.ListAPIView):
     serializer_class = ProductsByCategorySerializer
 
     def get_queryset(self):
-        print(self.request.GET)
         category_id = self.request.GET['category_id'][0]
         return Product.objects.filter(category_id=category_id)
-        # return Product.objects.all()
 
 
-class ProductDetails(APIView):
+class ProductDetailsAPI(APIView):
 
     def get(self, request, product_id):
         product = Product.objects.get(pk=product_id)
         serializer = ProductDetailsSerializer(product)
         return JsonResponse(serializer.data)
 
-    # def get_queryset(self):
-    #     product_id = self.request.GET['product_id'][0]
-    #     print(product_id)
-    #     print(type(product_id))
-    #     # serializer =
-    #     # return JsonResponse(serializer.data)
-    #     return Product.objects.get(pk=product_id)
+
+class DBusketAPI(APIView):
+
+    def get(self, request):
+        items = list(map(int, request.GET['items'].split(',')))
+        products = Product.objects.filter(pk__in=items)
+        serializer = ProductDetailsSerializer(products, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+# def DBusketAPI(request):
+#     if request.method == 'POST':
+#         ids = request.POST.getlist('data[]')  # Получение списка id из запроса
+#         # Обработка полученного списка id, например:
+#         print(ids)
+#         return JsonResponse({'message': 'Список id получен на сервере Django'})
+
+class FavouritesAPI(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user = User.objects.get(self.request.user)
+        serializer = FavouritesSerializer(user)
+        return JsonResponse(serializer.data)
+
+    # def post(self, request):
+    #     pass
 
 
-class ProfileData(APIView):
+class ProfileDataAPI(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):

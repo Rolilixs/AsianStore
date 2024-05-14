@@ -1,5 +1,6 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, Permission
 from django.contrib.auth.hashers import make_password
 # Create your models here.
 
@@ -37,10 +38,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(verbose_name="Имя пользователя", max_length=32)
     # Использовать сторонний метод для хранения номера телефона
     phone_number = models.CharField(verbose_name="Номер телефона", unique=True, max_length=11)
-    email = models.EmailField(null=True, blank=True, unique=True)
+    email = models.EmailField(verbose_name="Электронная почта", null=True, blank=True, unique=True)
 
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(verbose_name="Активен", default=True)
+    is_staff = models.BooleanField(verbose_name="Персонал", default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -58,3 +59,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.username
+
+    def has_module_perms(self, app_label):
+        return self.is_staff
+
+    def has_perm(self, perm, obj=None):
+        return self.is_staff

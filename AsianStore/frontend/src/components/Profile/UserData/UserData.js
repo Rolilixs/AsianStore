@@ -11,7 +11,7 @@ const UserData = ({token}) => {
     });
 
     useEffect(() => {
-        ConnectService.profile_data(token)
+        ConnectService.profileData(token)
             .then(response => {
                 setUserData({
                     username: response.data.username,
