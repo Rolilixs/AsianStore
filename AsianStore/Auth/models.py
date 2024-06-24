@@ -1,13 +1,10 @@
-from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, Permission
 from django.contrib.auth.hashers import make_password
-# Create your models here.
 
 
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password, phone_number):
-        """ Создает и возвращает пользователя с имэйлом, паролем и именем. """
         if username is None:
             raise TypeError('Users must have a username.')
 

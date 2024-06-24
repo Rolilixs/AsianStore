@@ -28,14 +28,19 @@ class ConnectService {
         return axios.get(`http://localhost:8000/api/favourites`)
     }
 
+    static favouritesCreate(token, id) {
+        axios.defaults.headers.common["Authorization"] = "Token " + token;
+        return axios.post(`http://localhost:8000/api/favourites/${id}`)
+    }
+
+    static favouritesDestroy(token, id) {
+        axios.defaults.headers.common["Authorization"] = "Token " + token;
+        return axios.delete(`http://localhost:8000/api/favourites/${id}`)
+    }
+
     static getDinamycCart(cart) {
         // axios.defaults.headers.common["Authorization"] = "Token " + token;
         return axios.get(`http://localhost:8000/api/dbusket?items=${cart}`)
-    }
-
-    static addToFavourite(token, productId) {
-        axios.defaults.headers.common["Authorization"] = "Token " + token;
-        return axios.post(`http://localhost:8000/api/favourites`)
     }
 
     static category() {

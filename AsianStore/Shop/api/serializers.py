@@ -21,7 +21,7 @@ class DeliveryTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProductsByCategorySerializer(serializers.ModelSerializer):
+class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
@@ -34,11 +34,9 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
 
 class ProductDetailsSerializer(serializers.ModelSerializer):
-    photos = ProductImageSerializer(many=True, read_only=True)
-
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'main_image', 'description', 'count_in_stock', 'photos']
+        fields = '__all__'
 
 
 class FavouritesSerializer(serializers.ModelSerializer):

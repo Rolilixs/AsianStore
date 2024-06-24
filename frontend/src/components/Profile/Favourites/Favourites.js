@@ -11,12 +11,17 @@ const Favourites = (props) => {
             .then((response) => {
                 setProductList(response.data)
             })
-        console.log(productList)
     }, []);
 
+    console.log(productList)
     return (
         <div>
             <h2>Favourites</h2>
+            <div className={styles.cart_items_list}>
+                {productList.map((product) => (
+                    <ProductCard key={product.id} type={"del"} {...product}/>
+                ))}
+            </div>
         </div>
     )
 }

@@ -11,27 +11,22 @@ const ProductDetails = () => {
     const [current, setCurrent] = useState(0)
 
     useEffect(() => {
-        ConnectService.product(id).then((response) => {
-            setProduct(response.data);
-            setPhotos(response.data.main_image);
-        });
-        console.log(photos);
-        ConnectService.productPhotos(id).then((response) => {
-            const data = response.data
-            data.map(photo => {
-                setPhotos([...photos, photo.image]);
-                console.log(photo.image)
-            })
+        const f1 = ConnectService.product(id)
+        const f2 = ConnectService.productPhotos(id)
 
+        Promise.all([f1, f2]).then(([res1, res2]) => {
+            setProduct(res1.data);
+            let data = res2.data.map((photo) => {return photo.image});
+            setPhotos([res1.data.main_image, ...data]);
         });
     }, [id]);
 
     const nextImage = () => {
-        setCurrent(current === length - 1 ? 0 : current + 1);
+        setCurrent(current === photos.length - 1 ? 0 : current + 1);
     };
 
     const prevImage = () => {
-        setCurrent(current === 0 ? length - 1 : current - 1);
+        setCurrent(current === 0 ? photos.length - 1 : current - 1);
     };
 
     const addToCart = () => {
@@ -41,18 +36,17 @@ const ProductDetails = () => {
     const addToFavourites = () => {
         return 0;
     }
-    console.log(photos);
+
     return (
         <div>
             <h2 className={styles.product_name}>{product.name}</h2>
             <div className={styles.product_outer}>
                 <div className={styles.photo_album}>
-                    {/*<ProductImageSlider {...product.photos}/>*/}
                     <div className={styles.main_photo}>
                         <FaArrowAltCircleLeft className={styles.left_arrow} onClick={prevImage}/>
                         <FaArrowAltCircleRight className={styles.right_arrow} onClick={nextImage}/>
-                        {product.photos !== undefined ?
-                            <img src={product.photos[current].image} alt=''/> : null
+                        {photos !== undefined ?
+                            <img src={photos[current]} alt=''/> : null
                         }
 
                     </div>
